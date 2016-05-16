@@ -30,7 +30,7 @@
         </ul>
         <div class="navbar-right">
             <a href="/logout" class="center-block">
-                <button class="btn-primary">
+                <button class="btn btn-primary">
                     注销登录
                 </button>
             </a>
