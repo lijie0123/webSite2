@@ -1,6 +1,6 @@
 package com.lijie.webSite1.api.app;
 
-import com.lijie.webSite1.api.dto.PersonDto;
+import com.lijie.webSite1.model.dto.PersonDto;
 import com.lijie.webSite1.model.exception.WebException;
 
 import java.util.List;

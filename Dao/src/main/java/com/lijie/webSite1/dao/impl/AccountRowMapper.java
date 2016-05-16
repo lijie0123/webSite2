@@ -10,9 +10,9 @@ import java.sql.SQLException;
 /**
  * Created by lijie on 2016/5/10.
  */
-public class AccountRowMapper implements RowMapper {
+public class AccountRowMapper implements RowMapper<Account> {
     @Override
-    public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
+    public Account mapRow(ResultSet rs, int rowNum) throws SQLException {
         Account account=new Account();
         account.setId(rs.getString("id"));
         account.setPassword(rs.getString("passwd"));

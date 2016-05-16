@@ -1,7 +1,7 @@
 package com.lijie.webSite1.api.impl;
 
 import com.lijie.webSite1.api.app.IPersonApi;
-import com.lijie.webSite1.api.dto.PersonDto;
+import com.lijie.webSite1.model.dto.PersonDto;
 import com.lijie.webSite1.model.entity.Person;
 import com.lijie.webSite1.model.exception.WebException;
 import com.lijie.webSite1.service.intr.IPersonService;

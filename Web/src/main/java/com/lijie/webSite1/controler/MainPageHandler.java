@@ -1,6 +1,8 @@
 package com.lijie.webSite1.controler;
 
+import com.lijie.webSite1.api.app.ICourseForStudentApi;
 import com.lijie.webSite1.api.app.IStudentApi;
+import com.lijie.webSite1.model.dto.CourseForStudent;
 import com.lijie.webSite1.model.entity.Account;
 import com.lijie.webSite1.model.entity.Student;
 import com.lijie.webSite1.model.enumeration.AccountType;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * Created by lijie on 2016/5/10.
@@ -20,6 +23,8 @@ import javax.servlet.http.HttpSession;
 public class MainPageHandler {
     @Autowired
     private IStudentApi studentApi;
+    @Autowired
+    private ICourseForStudentApi courseForStudentApi;
 
     @RequestMapping("mainPage")
     public ModelAndView cMain(HttpSession httpSession){
@@ -66,6 +71,31 @@ public class MainPageHandler {
         modelAndView.addObject("birthday",student.getBirthday().toString());
         modelAndView.addObject("moveInDay",student.getMoveInDay());
         return modelAndView;
+    }
+
+    @RequestMapping("studentCourse")
+    public ModelAndView cStudentCourse(HttpSession httpSession){
+        ModelAndView modelAndView=new ModelAndView();
+        Account account=(Account)httpSession.getAttribute("account");
+        Student student=null;
+        List<CourseForStudent> courseForStudents=null;
+        try{
+            student=getStudentAndHandleException(modelAndView,account.getAssociateId());
+        }catch (Exception e){
+            return modelAndView;
+        }
+        try {
+            courseForStudents=courseForStudentApi.getCoursesByStudentId(student.getId());
+        }catch (WebException e){
+            modelAndView.setViewName("/errorPage");
+            modelAndView.addObject("info",e.toString());
+            return modelAndView;
+        }
+
+        modelAndView.setViewName("studentCourse");
+        modelAndView.addObject("courses",courseForStudents);
+        return modelAndView;
+
     }
 
     private Student getStudentAndHandleException(ModelAndView modelAndView, String id) throws Exception{

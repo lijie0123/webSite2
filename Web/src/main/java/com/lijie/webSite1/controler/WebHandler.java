@@ -1,7 +1,7 @@
 package com.lijie.webSite1.controler;
 
 import com.lijie.webSite1.api.app.IPersonApi;
-import com.lijie.webSite1.api.dto.PersonDto;
+import com.lijie.webSite1.model.dto.PersonDto;
 import com.lijie.webSite1.model.exception.WebException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

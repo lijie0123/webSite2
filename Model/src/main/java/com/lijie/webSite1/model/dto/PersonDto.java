@@ -1,4 +1,4 @@
-package com.lijie.webSite1.api.dto;
+package com.lijie.webSite1.model.dto;
 
 /**
  * Created by lj on 16-3-6.

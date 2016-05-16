@@ -1,14 +1,15 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: lijie
-  Date: 2016/5/15
-  Time: 18:16
+  Date: 2016/5/16
+  Time: 18:43
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>主页</title>
+    <title>课程查询</title>
     <link href="../css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
     <script src="../js/jquery-2.2.3.min.js" type="text/javascript"></script>
     <script src="../js/bootstrap.min.js" type="text/javascript"></script>
@@ -24,7 +25,7 @@
         </div>
         <ul class="nav navbar-nav">
             <li><a href="#">通知公告</a></li>
-            <li><a href="studentCourse">课程查询</a></li>
+            <li><a href="studentCourse" class="active">课程查询</a></li>
             <li><a href="#">成绩查询</a></li>
             <li><a href="studentInfo">个人信息</a></li>
         </ul>
@@ -41,9 +42,29 @@
 <!--nav bar is 50px height-->
 <div style="height:50px;"></div>
 
-
 <div class="container">
-    <h1 class="text-center">欢迎你 ${name} !</h1>
+    <h1 class="text-center">你所选的课程如下</h1>
+    <table class="table">
+        <tr>
+            <th>课程名</th>
+            <th>授课教师</th>
+            <th>课程描述</th>
+            <th>开始时间</th>
+            <th>结束时间</th>
+        </tr>
+        <c:forEach var="course"  items="${courses}">
+            <tr >
+                <td>${course.name}</td>
+                <td>${course.teacherName}</td>
+                <td>${course.description}</td>
+                <td>${course.startDate}</td>
+                <td>${course.endDate}</td>
+
+            </tr>
+        </c:forEach>
+    </table>
+
+
 </div>
 
 </body>

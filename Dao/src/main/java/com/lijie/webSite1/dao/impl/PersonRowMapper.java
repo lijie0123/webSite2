@@ -9,8 +9,8 @@ import java.sql.SQLException;
 /**
  * Created by lj on 16-3-6.
  */
-public class PersonRowMapper implements RowMapper {
-    public Object mapRow(ResultSet resultSet, int i) throws SQLException {
+public class PersonRowMapper implements RowMapper<Person> {
+    public Person mapRow(ResultSet resultSet, int i) throws SQLException {
         Person person=new Person();
         person.setId(resultSet.getInt("id"));
         person.setName(resultSet.getString("name"));
