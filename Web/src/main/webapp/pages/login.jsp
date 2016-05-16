@@ -16,25 +16,28 @@
 </head>
 <body>
 <div class="container">
-    <h1 class="page-header"  ${loginErrorShow}>账户名或密码错误，请重新登录</h1>
-    <h1 class="page-header"  ${noLoginErrorShow}>请登录</h1>
-    <form id="loginForm" action="/login/login" method="post" class="form-horizontal">
-        <div class="form-group">
-            <div class="col-md-5 col-md-pull-0">
-                用户名<input id="userId" name="id" type="text" class="form-control"/>
+    <h1 class="page-header text-center"  ${loginErrorShow}>账户名或密码错误，请重新登录</h1>
+    <h1 class="page-header text-center"  ${noLoginErrorShow}>请登录</h1>
+    <div class="col-md-12 col-md-offset-4 ">
+        <form id="loginForm" action="/login/login" method="post" class="form-horizontal">
+            <div class="form-group">
+                <div class="col-md-5 col-md-pull-0">
+                    <input id="userId" name="id" type="text" class="form-control" placeholder="账户名"/>
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-5">
-                密码<input id="passwd" name="passwd" type="password" class="form-control"/>
+            <div class="form-group">
+                <div class="col-md-5">
+                    <input id="passwd" name="passwd" type="password" class="form-control" placeholder="密码"/>
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-5">
-                <button  class="btn-lg btn-primary" onclick="submitForm()">登   录</button>
+            <div class="form-group">
+                <div class="col-md-5">
+                    <button  class="btn btn-lg btn-primary btn-block" onclick="submitForm()">登   录</button>
+                </div>
             </div>
-        </div>
-    </form>
+        </form>
+    </div>
+
 </div>
 <script>
     function submitForm(){

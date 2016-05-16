@@ -1,9 +1,9 @@
 <%--
-Created by IntelliJ IDEA.
-User: lijie
-Date: 2016/5/15
-Time: 18:16
-To change this template use File | Settings | File Templates.
+  Created by IntelliJ IDEA.
+  User: lijie
+  Date: 2016/5/15
+  Time: 18:16
+  To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -26,13 +26,23 @@ To change this template use File | Settings | File Templates.
             <li><a href="#">通知公告</a></li>
             <li><a href="#">课程查询</a></li>
             <li><a href="#">成绩查询</a></li>
-            <li><a href="#">个人信息</a></li>
+            <li><a href="studentInfo">个人信息</a></li>
         </ul>
+        <div class="navbar-right">
+            <a href="/logout" class="center-block">
+                <button class="btn-primary">
+                    注销登录
+                </button>
+            </a>
+        </div>
     </div>
 </nav>
 
 <!--nav bar is 50px height-->
 <div style="height:50px;"></div>
+<div class="container">
+    <h1 class="text-center">欢迎你 ${name} !</h1>
+</div>
 
 </body>
 </html>
