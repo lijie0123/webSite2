@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 public class SessionInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        System.out.println("---interceptor is running---");
         if(request.getSession().getAttribute("id")==null||request.getSession().getAttribute("id").equals("")||request.getSession().getAttribute("account")==null){
             System.out.println("---jump to login page---");
             request.getRequestDispatcher("/login").forward(request, response);

@@ -25,7 +25,7 @@
         <ul class="nav navbar-nav">
             <li><a href="#">通知公告</a></li>
             <li><a href="studentCourse">课程查询</a></li>
-            <li><a href="#">成绩查询</a></li>
+            <li><a href="studentGrade">成绩查询</a></li>
             <li><a href="studentInfo">个人信息</a></li>
         </ul>
         <div class="navbar-right">

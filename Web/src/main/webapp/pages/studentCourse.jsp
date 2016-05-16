@@ -25,8 +25,8 @@
         </div>
         <ul class="nav navbar-nav">
             <li><a href="#">通知公告</a></li>
-            <li><a href="studentCourse" class="active">课程查询</a></li>
-            <li><a href="#">成绩查询</a></li>
+            <li class="active"><a href="studentCourse">课程查询</a></li>
+            <li><a href="studentGrade">成绩查询</a></li>
             <li><a href="studentInfo">个人信息</a></li>
         </ul>
         <div class="navbar-right">
@@ -43,7 +43,7 @@
 <div style="height:50px;"></div>
 
 <div class="container">
-    <h1 class="text-center">你所选的课程如下</h1>
+    <h1 class="text-center">你的成绩如下</h1>
     <table class="table">
         <tr>
             <th>课程名</th>

@@ -1,8 +1,10 @@
 package com.lijie.webSite1.controler;
 
 import com.lijie.webSite1.api.app.ICourseForStudentApi;
+import com.lijie.webSite1.api.app.IGradeForStudentApi;
 import com.lijie.webSite1.api.app.IStudentApi;
 import com.lijie.webSite1.model.dto.CourseForStudent;
+import com.lijie.webSite1.model.dto.GradeForStudent;
 import com.lijie.webSite1.model.entity.Account;
 import com.lijie.webSite1.model.entity.Student;
 import com.lijie.webSite1.model.enumeration.AccountType;
@@ -25,6 +27,8 @@ public class MainPageHandler {
     private IStudentApi studentApi;
     @Autowired
     private ICourseForStudentApi courseForStudentApi;
+    @Autowired
+    private IGradeForStudentApi gradeForStudentApi;
 
     @RequestMapping("mainPage")
     public ModelAndView cMain(HttpSession httpSession){
@@ -94,6 +98,31 @@ public class MainPageHandler {
 
         modelAndView.setViewName("studentCourse");
         modelAndView.addObject("courses",courseForStudents);
+        return modelAndView;
+
+    }
+
+    @RequestMapping("studentGrade")
+    public ModelAndView cStudentGrade(HttpSession httpSession){
+        ModelAndView modelAndView=new ModelAndView();
+        Account account=(Account)httpSession.getAttribute("account");
+        Student student=null;
+        List<GradeForStudent> gradeForStudents=null;
+        try{
+            student=getStudentAndHandleException(modelAndView,account.getAssociateId());
+        }catch (Exception e){
+            return modelAndView;
+        }
+        try {
+            gradeForStudents=gradeForStudentApi.getGradeForStudent(student.getId());
+        }catch (WebException e){
+            modelAndView.setViewName("/errorPage");
+            modelAndView.addObject("info",e.toString());
+            return modelAndView;
+        }
+
+        modelAndView.setViewName("studentGrade");
+        modelAndView.addObject("grades",gradeForStudents);
         return modelAndView;
 
     }

@@ -16,7 +16,7 @@ public class Main {
         ApplicationContext ac=new ClassPathXmlApplicationContext("daoTest.xml");
         ICourseRepo courseRepo= (ICourseRepo) ac.getBean("courseRepo");
         try{
-            System.out.println(courseRepo.getCourseVOsByStudentId("12345").toString());
+            System.out.println(courseRepo.getCourseVOsByStudentId("12345").get(2).getGrade());
         }catch (WebException e){
             e.printStackTrace();
         }
