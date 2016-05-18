@@ -2,10 +2,12 @@ package com.lijie.webSite1.controler;
 
 import com.lijie.webSite1.api.app.ICourseForStudentApi;
 import com.lijie.webSite1.api.app.IGradeForStudentApi;
+import com.lijie.webSite1.api.app.INewsApi;
 import com.lijie.webSite1.api.app.IStudentApi;
 import com.lijie.webSite1.model.dto.CourseForStudent;
 import com.lijie.webSite1.model.dto.GradeForStudent;
 import com.lijie.webSite1.model.entity.Account;
+import com.lijie.webSite1.model.entity.News;
 import com.lijie.webSite1.model.entity.Student;
 import com.lijie.webSite1.model.enumeration.AccountType;
 import com.lijie.webSite1.model.exception.WebException;
@@ -29,6 +31,8 @@ public class MainPageHandler {
     private ICourseForStudentApi courseForStudentApi;
     @Autowired
     private IGradeForStudentApi gradeForStudentApi;
+    @Autowired
+    private INewsApi newsApi;
 
     @RequestMapping("mainPage")
     public ModelAndView cMain(HttpSession httpSession){
@@ -98,6 +102,31 @@ public class MainPageHandler {
 
         modelAndView.setViewName("studentCourse");
         modelAndView.addObject("courses",courseForStudents);
+        return modelAndView;
+
+    }
+
+    @RequestMapping("studentNews")
+    public ModelAndView cStudentNews(HttpSession httpSession){
+        ModelAndView modelAndView=new ModelAndView();
+        Account account=(Account)httpSession.getAttribute("account");
+        Student student=null;
+        List<News> newses=null;
+        try{
+            student=getStudentAndHandleException(modelAndView,account.getAssociateId());
+        }catch (Exception e){
+            return modelAndView;
+        }
+        try {
+            newses=newsApi.getAll();
+        }catch (WebException e){
+            modelAndView.setViewName("/errorPage");
+            modelAndView.addObject("info",e.toString());
+            return modelAndView;
+        }
+
+        modelAndView.setViewName("studentNews");
+        modelAndView.addObject("newses",newses);
         return modelAndView;
 
     }

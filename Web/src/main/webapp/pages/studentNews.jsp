@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: lijie
@@ -8,7 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>主页</title>
+    <title>通知公告</title>
     <link href="../css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
     <script src="../js/jquery-2.2.3.min.js" type="text/javascript"></script>
     <script src="../js/bootstrap.min.js" type="text/javascript"></script>
@@ -23,7 +24,7 @@
 
         </div>
         <ul class="nav navbar-nav">
-            <li><a href="studentNews">通知公告</a></li>
+            <li  class="active"><a href="studentNews">通知公告</a></li>
             <li><a href="studentCourse">课程查询</a></li>
             <li><a href="studentGrade">成绩查询</a></li>
             <li><a href="studentInfo">个人信息</a></li>
@@ -43,7 +44,14 @@
 
 
 <div class="container">
-    <h1 class="text-center">欢迎你 ${name} !</h1>
+    <h1 class="text-center">通知消息</h1>
+    <ul class="list-group">
+        <c:forEach var="news" items="${newses}">
+            <li class="list-group-item">
+                ${news.content}
+            </li>
+        </c:forEach>
+    </ul>
 </div>
 
 </body>

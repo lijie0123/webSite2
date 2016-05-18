@@ -23,7 +23,7 @@
 
         </div>
         <ul class="nav navbar-nav">
-            <li ><a href="#">通知公告</a></li>
+            <li ><a href="studentNews">通知公告</a></li>
             <li><a href="studentCourse">课程查询</a></li>
             <li><a href="studentGrade">成绩查询</a></li>
             <li class="active"><a href="studentInfo">个人信息</a></li>
