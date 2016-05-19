@@ -18,11 +18,11 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <a href="mainPage" class="navbar-brand">
-                <img src="../picture/lijie.png" style="height:50px; margin-top: -15px"/>
+                <img src="../picture/logo.png" style="height:50px; margin-top: -15px"/>
             </a>
-
         </div>
         <ul class="nav navbar-nav">
+            <li class="active"><a href="mainPage">首页</a> </li>
             <li><a href="studentNews">通知公告</a></li>
             <li><a href="studentCourse">课程查询</a></li>
             <li><a href="studentGrade">成绩查询</a></li>

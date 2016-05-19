@@ -19,7 +19,7 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <a href="mainPage" class="navbar-brand">
-                <img src="../picture/logo.jpg" style="height:50px; margin-top: -15px"/>
+                <img src="../picture/logo.png" style="height:50px; margin-top: -15px"/>
             </a>
         </div>
 
