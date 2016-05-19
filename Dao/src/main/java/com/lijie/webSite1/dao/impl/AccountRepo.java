@@ -84,10 +84,10 @@ public class AccountRepo implements IAccountRepo{
             throw new WebException(2,"数据库访问出错");
         }
         if(affectedRow==0){
-            throw new WebException(102,"未删除一行");
+            throw new WebException(104,"未影响一行");
         }
         else if(affectedRow>1){
-            throw new WebException(103,"删除多行");
+            throw new WebException(105,"影响多行");
         }
     }
 

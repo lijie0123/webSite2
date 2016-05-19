@@ -9,12 +9,14 @@ public class CourseVO {
     private String id;
     private String name;
     private String teacherId;
+    private String teacherName;
     private String stuId;
+    private String stuName;
     private String description;
     private Date startDate;
     private Date endDate;
     private String grade;//the grade of this course
-    private String teacherName;
+
 
     public String getId() {
         return id;
@@ -88,18 +90,27 @@ public class CourseVO {
         this.stuId = stuId;
     }
 
+    public String getStuName() {
+        return stuName;
+    }
+
+    public void setStuName(String stuName) {
+        this.stuName = stuName;
+    }
+
     @Override
     public String toString() {
         return "CourseVO{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", teacherId='" + teacherId + '\'' +
+                ", teacherName='" + teacherName + '\'' +
                 ", stuId='" + stuId + '\'' +
+                ", stuName='" + stuName + '\'' +
                 ", description='" + description + '\'' +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
                 ", grade='" + grade + '\'' +
-                ", teacherName='" + teacherName + '\'' +
                 '}';
     }
 }

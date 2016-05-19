@@ -4,6 +4,7 @@ import com.lijie.webSite1.api.app.*;
 import com.lijie.webSite1.dao.intr.ITeacherRepo;
 import com.lijie.webSite1.model.dto.CourseForStudent;
 import com.lijie.webSite1.model.dto.GradeForStudent;
+import com.lijie.webSite1.model.dto.GradeForTeacher;
 import com.lijie.webSite1.model.entity.*;
 import com.lijie.webSite1.model.enumeration.AccountType;
 import com.lijie.webSite1.model.exception.WebException;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
@@ -34,6 +37,8 @@ public class MainPageHandler {
     private IGradeForStudentApi gradeForStudentApi;
     @Autowired
     private INewsApi newsApi;
+    @Autowired
+    private IGradeForTeacherApi gradeForTeacherApi;
 
     @RequestMapping("mainPage")
     public ModelAndView cMain(HttpSession httpSession){
@@ -202,6 +207,43 @@ public class MainPageHandler {
         return modelAndView;
     }
 
+    @RequestMapping("addCourse")
+    public ModelAndView cDeleteCourseById(HttpSession httpSession, @RequestParam("id") String id, @RequestParam("name") String name, @RequestParam("description") String description, @RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate) throws ParseException {
+        ModelAndView modelAndView=new ModelAndView();
+        Account account=(Account)httpSession.getAttribute("account");
+        Teacher teacher=null;
+        Course course=null;
+        try{
+            teacher=getTeacherAndHandleException(modelAndView,account.getAssociateId());
+        }catch (Exception e){
+            return modelAndView;
+        }
+        course=new Course();
+        course.setId(id);
+        course.setName(name);
+        course.setTeacherId(teacher.getId());
+        course.setDescription(description);
+        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd");
+        try{
+            course.setStartDate(simpleDateFormat.parse(startDate));
+            System.out.println(simpleDateFormat.parse(startDate).getTime());
+            course.setEndDate(simpleDateFormat.parse(endDate));
+        }catch (ParseException e){
+            modelAndView.setViewName("/errorPage");
+            modelAndView.addObject("info","日期格式错误"+e.toString());
+            return modelAndView;
+        }
+        try {
+            courseForTeacherApi.addCourse(course);
+        } catch (WebException e) {
+            modelAndView.setViewName("/errorPage");
+            modelAndView.addObject("info",e.toString());
+            return modelAndView;
+        }
+        modelAndView.setViewName("redirect:teacherCourse");
+        return modelAndView;
+    }
+
     @RequestMapping("studentNews")
     public ModelAndView cStudentNews(HttpSession httpSession){
         ModelAndView modelAndView=new ModelAndView();
@@ -275,6 +317,98 @@ public class MainPageHandler {
         modelAndView.addObject("grades",gradeForStudents);
         return modelAndView;
 
+    }
+
+    @RequestMapping("teacherGrade")
+    public ModelAndView cTeacherGrade(HttpSession httpSession){
+        ModelAndView modelAndView=new ModelAndView();
+        Account account=(Account)httpSession.getAttribute("account");
+        Teacher teacher=null;
+        List<Course> courses=null;
+        try{
+            teacher=getTeacherAndHandleException(modelAndView,account.getAssociateId());
+        }catch (Exception e){
+            return modelAndView;
+        }
+        try {
+            courses=courseForTeacherApi.getAllByTeacherId(teacher.getId());
+        }catch (WebException e){
+            modelAndView.setViewName("/errorPage");
+            modelAndView.addObject("info",e.toString());
+            return modelAndView;
+        }
+
+        modelAndView.setViewName("teacherGrade");
+        modelAndView.addObject("courses",courses);
+        return modelAndView;
+    }
+
+    @RequestMapping("teacherGradeIndex")
+    public ModelAndView cTeacherGradeIndex(HttpSession httpSession, @RequestParam("courseId") String courseId){
+        ModelAndView modelAndView=new ModelAndView();
+        Account account=(Account)httpSession.getAttribute("account");
+        Teacher teacher=null;
+        Course course=null;
+        List<CourseVO> courses=null;
+        try{
+            teacher=getTeacherAndHandleException(modelAndView,account.getAssociateId());
+        }catch (Exception e){
+            return modelAndView;
+        }
+        try {
+            course=courseForTeacherApi.getCourseById(courseId);
+        }catch (WebException e){
+            modelAndView.setViewName("/errorPage");
+            modelAndView.addObject("info",e.toString());
+            return modelAndView;
+        }
+        List<GradeForTeacher> gradeForTeachers=null;
+        try{
+            gradeForTeachers=gradeForTeacherApi.getStudentCourses(courseId);
+        }catch (WebException e){
+            modelAndView.setViewName("/errorPage");
+            modelAndView.addObject("info",e.toString());
+            return modelAndView;
+        }
+        modelAndView.setViewName("teacherGradeIndex");
+        modelAndView.addObject("courseName",course.getName());
+        modelAndView.addObject("courseId",course.getId());
+        modelAndView.addObject("gradeForTeachers",gradeForTeachers);
+        return modelAndView;
+    }
+    @RequestMapping("updateGrade")
+    public ModelAndView cUpdateGrade(HttpSession httpSession, @RequestParam("stuId") String stuId, @RequestParam("courseId") String courseId, @RequestParam("grade") String grade){
+        ModelAndView modelAndView=new ModelAndView();
+        Account account=(Account)httpSession.getAttribute("account");
+        Teacher teacher=null;
+        Course course=null;
+        List<CourseVO> courses=null;
+        try{
+            teacher=getTeacherAndHandleException(modelAndView,account.getAssociateId());
+        }catch (Exception e){
+            return modelAndView;
+        }
+        try {
+            course=courseForTeacherApi.getCourseById(courseId);
+        }catch (WebException e){
+            modelAndView.setViewName("/errorPage");
+            modelAndView.addObject("info",e.toString());
+            return modelAndView;
+        }
+        if(!course.getTeacherId().equals(teacher.getId())){
+            modelAndView.setViewName("/errorPage");
+            modelAndView.addObject("info","你不是该课程的授课老师");
+            return modelAndView;
+        }
+        try{
+            gradeForTeacherApi.updateGrade(stuId,courseId,grade);
+        }catch (WebException e){
+            modelAndView.setViewName("/errorPage");
+            modelAndView.addObject("info",e.toString());
+            return modelAndView;
+        }
+        modelAndView.setViewName("redirect:teacherGradeIndex?courseId="+courseId);
+        return modelAndView;
     }
 
     private Student getStudentAndHandleException(ModelAndView modelAndView, String id) throws Exception{

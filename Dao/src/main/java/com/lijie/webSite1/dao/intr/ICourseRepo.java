@@ -11,6 +11,7 @@ import java.util.List;
  */
 public interface ICourseRepo {
     public List<CourseVO> getCourseVOsByStudentId(String stuId)throws WebException;
+    public List<CourseVO> getCourseVOsByCourseId(String courseId) throws WebException;
     public void addCourse(Course course) throws WebException;
     public List<Course> getAllByTeacherId(String teacherId) throws WebException;
     public void deleteById(String id) throws WebException;

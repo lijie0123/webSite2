@@ -15,6 +15,7 @@ public class CouseDtoRowMapper implements RowMapper<CourseVO>{
         CourseVO courseVO =new CourseVO();
         courseVO.setId(rs.getString("id"));
         courseVO.setName(rs.getString("name"));
+        courseVO.setStuName(rs.getString("stuName"));
         courseVO.setDescription(rs.getString("description"));
         courseVO.setStartDate(rs.getDate("startDate"));
         courseVO.setEndDate(rs.getDate("endDate"));

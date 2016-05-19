@@ -9,7 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>主页</title>
+    <title>通知公告</title>
     <link href="../css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
     <script src="../js/jquery-2.2.3.min.js" type="text/javascript"></script>
     <script src="../js/bootstrap.min.js" type="text/javascript"></script>
@@ -19,15 +19,16 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <a href="mainPage" class="navbar-brand">
-                <img src="../picture/lijie.png" style="height:50px; margin-top: -15px"/>
+                <img src="../picture/logo.jpg" style="height:50px; margin-top: -15px"/>
             </a>
-
         </div>
+
         <ul class="nav navbar-nav">
+            <li><a href="mainPage">首页</a> </li>
             <li class="active"><a href="teacherNews">通知公告</a></li>
-            <li><a href="studentCourse">课程管理</a></li>
-            <li><a href="studentGrade">成绩管理</a></li>
-            <li><a href="studentInfo">个人信息</a></li>
+            <li><a href="teacherCourse">课程管理</a></li>
+            <li><a href="teacherGrade">成绩管理</a></li>
+            <li><a href="teacherInfo">个人信息</a></li>
         </ul>
         <div class="navbar-right">
             <a href="/logout" class="center-block">
