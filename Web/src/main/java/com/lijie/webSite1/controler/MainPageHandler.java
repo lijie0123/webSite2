@@ -58,9 +58,10 @@ public class MainPageHandler {
 
     private ModelAndView cStudentMain(ModelAndView modelAndView, HttpSession httpSession){
         modelAndView.setViewName("studentMain");
-        Account account= (Account) httpSession.getAttribute("account");
+        Account account=null;
         Student student=null;
         try{
+            account= (Account) httpSession.getAttribute("account");
             student=getStudentAndHandleException(modelAndView,account.getAssociateId());
         }catch (Exception e){
             return modelAndView;
@@ -71,9 +72,10 @@ public class MainPageHandler {
 
     private ModelAndView cTacherMain(ModelAndView modelAndView, HttpSession httpSession){
         modelAndView.setViewName("teacherMain");
-        Account account= (Account) httpSession.getAttribute("account");
+        Account account=null;
         Teacher teacher=null;
         try{
+            account=(Account) httpSession.getAttribute("account");
             teacher=getTeacherAndHandleException(modelAndView,account.getAssociateId());
         }catch (Exception e){
             return modelAndView;
@@ -86,9 +88,10 @@ public class MainPageHandler {
     @RequestMapping("studentInfo")
     public ModelAndView cStudentInfo(HttpSession httpSession){
         ModelAndView modelAndView=new ModelAndView();
-        Account account=(Account)httpSession.getAttribute("account");
+        Account account=null;
         Student student=null;
         try{
+            account=(Account)httpSession.getAttribute("account");
             student=getStudentAndHandleException(modelAndView,account.getAssociateId());
         }catch (Exception e){
             return modelAndView;
@@ -106,9 +109,10 @@ public class MainPageHandler {
     @RequestMapping("teacherInfo")
     public ModelAndView cTeacherInfo(HttpSession httpSession){
         ModelAndView modelAndView=new ModelAndView();
-        Account account= (Account) httpSession.getAttribute("account");
+        Account account=null;
         Teacher teacher=null;
         try{
+            account= (Account) httpSession.getAttribute("account");
             teacher=getTeacherAndHandleException(modelAndView,account.getAssociateId());
         }catch (Exception e){
             return modelAndView;
@@ -126,10 +130,11 @@ public class MainPageHandler {
     @RequestMapping("studentCourse")
     public ModelAndView cStudentCourse(HttpSession httpSession){
         ModelAndView modelAndView=new ModelAndView();
-        Account account=(Account)httpSession.getAttribute("account");
+        Account account=null;
         Student student=null;
         List<CourseForStudent> courseForStudents=null;
         try{
+            account=(Account)httpSession.getAttribute("account");
             student=getStudentAndHandleException(modelAndView,account.getAssociateId());
         }catch (Exception e){
             return modelAndView;
@@ -151,10 +156,11 @@ public class MainPageHandler {
     @RequestMapping("teacherCourse")
     public ModelAndView cTeacherCourse(HttpSession httpSession){
         ModelAndView modelAndView=new ModelAndView();
-        Account account=(Account)httpSession.getAttribute("account");
+        Account account=null;
         Teacher teacher=null;
         List<Course> courses=null;
         try{
+            account=(Account)httpSession.getAttribute("account");
             teacher=getTeacherAndHandleException(modelAndView,account.getAssociateId());
         }catch (Exception e){
             return modelAndView;
@@ -175,10 +181,11 @@ public class MainPageHandler {
     @RequestMapping("deleteCourseById")
     public ModelAndView cDeleteCourseById(HttpSession httpSession, @RequestParam("id") String courseId){
         ModelAndView modelAndView=new ModelAndView();
-        Account account=(Account)httpSession.getAttribute("account");
+        Account account=null;
         Teacher teacher=null;
         Course course=null;
         try{
+            account=(Account)httpSession.getAttribute("account");
             teacher=getTeacherAndHandleException(modelAndView,account.getAssociateId());
         }catch (Exception e){
             return modelAndView;
@@ -210,10 +217,11 @@ public class MainPageHandler {
     @RequestMapping("addCourse")
     public ModelAndView cDeleteCourseById(HttpSession httpSession, @RequestParam("id") String id, @RequestParam("name") String name, @RequestParam("description") String description, @RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate) throws ParseException {
         ModelAndView modelAndView=new ModelAndView();
-        Account account=(Account)httpSession.getAttribute("account");
+        Account account=null;
         Teacher teacher=null;
         Course course=null;
         try{
+            account=(Account)httpSession.getAttribute("account");
             teacher=getTeacherAndHandleException(modelAndView,account.getAssociateId());
         }catch (Exception e){
             return modelAndView;
@@ -247,10 +255,11 @@ public class MainPageHandler {
     @RequestMapping("studentNews")
     public ModelAndView cStudentNews(HttpSession httpSession){
         ModelAndView modelAndView=new ModelAndView();
-        Account account=(Account)httpSession.getAttribute("account");
+        Account account=null;
         Student student=null;
         List<News> newses=null;
         try{
+            account=(Account)httpSession.getAttribute("account");
             student=getStudentAndHandleException(modelAndView,account.getAssociateId());
         }catch (Exception e){
             return modelAndView;
@@ -271,10 +280,11 @@ public class MainPageHandler {
     @RequestMapping("teacherNews")
     public ModelAndView cTeacherNews(HttpSession httpSession){
         ModelAndView modelAndView=new ModelAndView();
-        Account account=(Account)httpSession.getAttribute("account");
+        Account account=null;
         Teacher teacher=null;
         List<News> newses=null;
         try{
+            account=(Account)httpSession.getAttribute("account");
             teacher=getTeacherAndHandleException(modelAndView,account.getAssociateId());
         }catch (Exception e){
             return modelAndView;
@@ -297,10 +307,11 @@ public class MainPageHandler {
     @RequestMapping("studentGrade")
     public ModelAndView cStudentGrade(HttpSession httpSession){
         ModelAndView modelAndView=new ModelAndView();
-        Account account=(Account)httpSession.getAttribute("account");
+        Account account=null;
         Student student=null;
         List<GradeForStudent> gradeForStudents=null;
         try{
+            account=(Account)httpSession.getAttribute("account");
             student=getStudentAndHandleException(modelAndView,account.getAssociateId());
         }catch (Exception e){
             return modelAndView;
@@ -322,10 +333,11 @@ public class MainPageHandler {
     @RequestMapping("teacherGrade")
     public ModelAndView cTeacherGrade(HttpSession httpSession){
         ModelAndView modelAndView=new ModelAndView();
-        Account account=(Account)httpSession.getAttribute("account");
+        Account account=null;
         Teacher teacher=null;
         List<Course> courses=null;
         try{
+            account=(Account)httpSession.getAttribute("account");
             teacher=getTeacherAndHandleException(modelAndView,account.getAssociateId());
         }catch (Exception e){
             return modelAndView;
@@ -346,11 +358,12 @@ public class MainPageHandler {
     @RequestMapping("teacherGradeIndex")
     public ModelAndView cTeacherGradeIndex(HttpSession httpSession, @RequestParam("courseId") String courseId){
         ModelAndView modelAndView=new ModelAndView();
-        Account account=(Account)httpSession.getAttribute("account");
+        Account account=null;
         Teacher teacher=null;
         Course course=null;
         List<CourseVO> courses=null;
         try{
+            account=(Account)httpSession.getAttribute("account");
             teacher=getTeacherAndHandleException(modelAndView,account.getAssociateId());
         }catch (Exception e){
             return modelAndView;
@@ -360,6 +373,11 @@ public class MainPageHandler {
         }catch (WebException e){
             modelAndView.setViewName("/errorPage");
             modelAndView.addObject("info",e.toString());
+            return modelAndView;
+        }
+        if(!course.getTeacherId().equals(teacher.getId())){
+            modelAndView.setViewName("/errorPage");
+            modelAndView.addObject("info","你不是该课程的授课老师");
             return modelAndView;
         }
         List<GradeForTeacher> gradeForTeachers=null;
@@ -379,11 +397,12 @@ public class MainPageHandler {
     @RequestMapping("updateGrade")
     public ModelAndView cUpdateGrade(HttpSession httpSession, @RequestParam("stuId") String stuId, @RequestParam("courseId") String courseId, @RequestParam("grade") String grade){
         ModelAndView modelAndView=new ModelAndView();
-        Account account=(Account)httpSession.getAttribute("account");
+        Account account=null;
         Teacher teacher=null;
         Course course=null;
         List<CourseVO> courses=null;
         try{
+            account=(Account)httpSession.getAttribute("account");
             teacher=getTeacherAndHandleException(modelAndView,account.getAssociateId());
         }catch (Exception e){
             return modelAndView;
